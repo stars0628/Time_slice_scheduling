@@ -6,7 +6,7 @@ taskHandle_t taskHandles[MAX_TASKS];
 /*!
  *
  *说明：任务创建函数
- *参数： *taskHandle：任务数组
+ *参数： *taskHandle：任务结构体数组
         *taskName：任务名字
         (*taskEnter)(void)任务处理函数
         taskCycle任务周期
@@ -36,8 +36,8 @@ void taskProcess(void)
     unsigned char i = 0;
     for (i = 0; i < MAX_TASKS; i++) {
         if (taskHandles[i].status == TASK_RUNNING) {
-            taskHandles[i].status = TASK_IDLE;
             taskHandles[i].taskEnter();
+            taskHandles[i].status = TASK_IDLE;
         }
     }
 }
@@ -58,4 +58,15 @@ void timeCounter(void)
             taskHandles[i].status = TASK_RUNNING;
         }
     }
+}
+
+/*!
+ *
+ *说明：修改任务周期
+ *参数：*taskHandle：任务结构体数组，cycle:周期
+ *返回值：
+ */
+void timeCycleChange(taskHandle_t *taskHandle, unsigned int cycle)
+{
+    taskHandle->taskCycle = cycle;
 }

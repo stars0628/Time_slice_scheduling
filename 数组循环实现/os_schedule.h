@@ -33,4 +33,5 @@ extern taskHandle_t taskHandles[MAX_TASKS];
 void taskCreate(taskHandle_t *taskHandle, char *taskName, void (*taskEnter)(void), unsigned int taskCycle);
 void taskProcess(void);
 void timeCounter(void);
+void timeCycleChange(taskHandle_t *taskHandle, unsigned int cycle);
 #endif
